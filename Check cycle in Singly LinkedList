@@ -1,0 +1,62 @@
+PROBLEM STATEMENT:
+
+*Given head, the head of a linked list, determine if the linked list has a cycle in it.
+*There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. 
+ Internally, pos is used to denote the index of the node that tail's next pointer is connected to. 
+(Note that pos is not passed as a parameter.)
+*Return true if there is a cycle in the linked list. Otherwise, return false.
+
+Example 1:
+    Input: head = [3,2,0,-4], pos = 1
+    Output: true
+    Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+
+Example 2:
+    Input: head = [1,2], pos = 0
+    Output: true
+    Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+
+Example 3:
+    Input: head = [1], pos = -1
+    Output: false
+    Explanation: There is no cycle in the linked list.
+
+THE APPROACH:
+
+***Floyd’s Cycle-Finding Algorithm // fast slow approach // 2 pointers // "tortoise and the hare algorithm"***
+
+Traverse linked list using two pointers.
+
+Move one pointer(slow_p) by one and another pointer(fast_p) by two.
+
+If these pointers meet at the same node then there is a loop. If pointers do not meet then linked list doesn’t have a loop.
+
+Above linked list has a loop as node 5 is connected to node 2 foming a Cycle.
+
+The algorithm can be reffered to as a real life scenario 
+
+Suppose there are two people running on a track one with a speed x and another with a speed 2x (twice of first) now it's clear that person 2 is faster.
+Now assume the track to be circular and now since peson 2 will have faster speed so it is very sure that person two will meet person 1 or he will overtake him.
+
+Now the above scenario is similar to our problem statement where given linkedlist is the track and if the linked list would have a cycle it would be same as the circular track and the above conditon will definitely meet, i.e person 2 will overtake or meet person one.
+
+person 1 is slow pointer here and moving by 1 node at a time and person 2 is fast pointer here moving with 2 nodes at a time. So they will meet definitely at some point if the linkedlist contains a cycle that is our fast and slow pointer reference will become equal or they point at same memory location.
+
+Let's code..
+      class Solution {
+      public:
+          bool hasCycle(ListNode *head) {
+              ListNode *tortoise=head,*hare = head;
+              while(hare && hare->next){
+                  tortoise = tortoise->next;
+                  hare = hare->next->next;
+                  if(tortoise==hare)
+                      return true;
+              }
+              return false;
+          }
+      };
+
+
+
+
