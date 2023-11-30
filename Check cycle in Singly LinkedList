@@ -31,8 +31,6 @@ Move one pointer(slow_p) by one and another pointer(fast_p) by two.
 
 If these pointers meet at the same node then there is a loop. If pointers do not meet then linked list doesn’t have a loop.
 
-Above linked list has a loop as node 5 is connected to node 2 foming a Cycle.
-
 The algorithm can be reffered to as a real life scenario 
 
 Suppose there are two people running on a track one with a speed x and another with a speed 2x (twice of first) now it's clear that person 2 is faster.
