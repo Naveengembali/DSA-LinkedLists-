@@ -1,0 +1,61 @@
+PROBLEM STATEMENT: 
+Given the head of a singly linked list, return true if it is a 
+palindrome or false otherwise.  
+
+NAIVE APPROACH:
+we can iterate over the linked list and store the values in an array and then we can reverse the array and can check whether it is  Palindrome or not..
+But,in worst case the space comlexity will be O(n)I
+How can we reduce this??
+
+OPTIMAL APPROACH: 
+// Tortise hare method :: two pointer approach(slow and fast)::
+
+slow can traverse upto middle of the linked list and then fast will be at last node and then simply reverse the half of the linked list from then to last node;
+-take fast to head of the node ;
+now compare each node by simply traversing if value of any node is not matching simply return false else the given LL is palindrome..
+
+
+The code: 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+       ListNode *slow = head,*fast =head;
+       while(fast && fast->next){
+           slow = slow->next;
+           fast = fast->next->next;
+        }
+        ListNode * prev = nullptr;
+        while(slow){
+            fast = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = fast;
+        }
+        fast = head;
+        while(fast && prev){
+            if(fast->val != prev->val)
+                return false;
+            fast = fast->next;
+            prev = prev->next;
+        }
+        return true;
+    }
+};
+
+TIME COMPLEXITY:      O(n)
+SPACE COMPLEXITY:     O(1)
+
+
+
+
