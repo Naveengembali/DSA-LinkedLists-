@@ -1,0 +1,42 @@
+Problem statement: 
+ you are given a linked list head pointing to head node.you have to return the length of the cycle within the linked list
+ If there is no loop/cycle return 0;
+
+
+
+The code:   
+APPROACH:
+    Use tortoise hare method|floyd's 2 pointer approach..
+/**
+ * Definition of linked list:
+ *
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *next;
+ *
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->next = NULL;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+int lengthOfLoop(Node *head) {
+    // Write your code here
+    Node *tortoise=head,*hare = head;
+    int len = 0;
+    while(hare && hare->next){
+        tortoise = tortoise->next;
+        hare= hare->next->next;
+        if(tortoise == hare){
+            do{
+                tortoise = tortoise->next;
+                len++;
+            }while(tortoise != hare);
+            break;
+        }
+    }
+    return len;
+}
